@@ -9,8 +9,8 @@ type chapterProps = {
     navigateRender: (id: number) => void
 }
 
-type versesProps = {
-    verses: Verses,
+type verseProps = {
+    verse: Verses,
     navigateRender: (id: number) => void
 }
 
@@ -52,7 +52,7 @@ export const ChapterList = ({ chapter, navigateRender }: chapterProps) => {
     )
 }
 
-export const VersesList = ({ verses, navigateRender }: versesProps) => {
+export const VersesList = ({ verse, navigateRender }: versesProps) => {
 
     return (
         <View style={styles.col}>
@@ -67,10 +67,10 @@ export const VersesList = ({ verses, navigateRender }: versesProps) => {
                     <Text style={styles.contentText}>
                         {verse.translations
                             .filter(
-                                tr =>
+                                (tr: Verses) =>
                                     tr.author_name === "Shri Purohit Swami"
                             )
-                            .map(tr => tr.description)
+                            .map((tr:Verses) => tr.description)
                             .join(" ")}
                     </Text>
                 </View>
@@ -84,10 +84,10 @@ export const VersesList = ({ verses, navigateRender }: versesProps) => {
                     <Text style={styles.contentText}>
                         {verse.commentaries
                             .filter(
-                                tr =>
+                                (tr: Verses) =>
                                     tr.author_name === "Swami Sivananda"
                             )
-                            .map(tr => tr.description)
+                            .map((tr: Verses) => tr.description)
                             .join(" ")}
                     </Text>
                 </View>
