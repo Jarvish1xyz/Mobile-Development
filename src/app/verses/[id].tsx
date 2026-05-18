@@ -4,54 +4,40 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import axios from 'axios';
 import { Chapter, Verses } from '../../constants/data';
-import { ExplainChapterComponent } from '@/components/Explain';
+import { ExplainChapterComponent, ExplainVersesComponent, ExplainVerseTranslateComponent } from '@/components/Explain';
 import { VersesList } from '@/components/ListCards';
 
 const chaperByIdPage = () => {
 
   const inset = useSafeAreaInsets();
-  const { id } = useLocalSearchParams();
+  const { chId, id } = useLocalSearchParams();
 
-  const [chapterData, setChapterData] = useState<Chapter | null>(null);
-  const [versesList, setVersesList] = useState<Verses | null>(null);
+  const [verses, setVerses] = useState<Verses | null>(null);
 
   const fetchData = useCallback(async () => {
     try {
-      const chapterRes = await axios.get(`https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${id}/`, {
+      const versesRes = await axios.get(`https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${chId}/verses/${id}`, {
         headers: {
           'x-rapidapi-key': 'bcba844d26msh2d333e852898b44p124f13jsn0e520c9be445',
           'x-rapidapi-host': 'bhagavad-gita3.p.rapidapi.com'
         }
       });
-      setChapterData(chapterRes.data);
-
-      const versesRes = await axios.get(`https://bhagavad-gita3.p.rapidapi.com/v2/chapters/${id}/verses/`, {
-        headers: {
-          'x-rapidapi-key': 'bcba844d26msh2d333e852898b44p124f13jsn0e520c9be445',
-          'x-rapidapi-host': 'bhagavad-gita3.p.rapidapi.com'
-        }
-      });
-      setVersesList(versesRes.data);
+      console.log('Fetched verse data:', versesRes.data);
+      setVerses(versesRes.data);
     } catch (err) {
       console.error('Error fetching chapter or verses:', err);
     }
-  }, [id]);
+  }, [chId, id]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
-  const handelNavigation = (id: number) => {
-    router.push(`/verses/${id}`);
-  }
-
   return (
     <View style={styles.screen}>
 
-      {/* Explainv Section */}
-      
-
-      {/* Translation + Commentary */}
+      <ExplainVersesComponent verse={verses} />
+      <ExplainVerseTranslateComponent verse={verses} />
       
     </View>
   )

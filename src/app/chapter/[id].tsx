@@ -11,6 +11,7 @@ const chaperByIdPage = () => {
 
   const inset = useSafeAreaInsets();
   const { id } = useLocalSearchParams();
+  const chId = Number(id);
 
   const [chapterData, setChapterData] = useState<Chapter | null>(null);
   const [versesList, setVersesList] = useState<Verses | null>(null);
@@ -42,17 +43,16 @@ const chaperByIdPage = () => {
   }, [fetchData]);
 
   const handelNavigation = (id: number) => {
-    router.push(`/verses/${id}`);
+    router.push({
+      pathname: `/verses/:${id}`,
+      params: { chId: chId, id: id }
+    });
   }
 
   return (
     <View style={styles.screen}>
 
-
-      {/* Verse List */}
       <View style={styles.verseContainer}>
-
-        
 
         <FlatList
           data={versesList}

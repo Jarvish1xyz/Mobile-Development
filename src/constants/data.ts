@@ -17,4 +17,7 @@ export type Verses = {
     chapter_number: number,
     transliteration: string,
     word_meanings: string,
+    author_name: string,
+    description: string,
+    commentaries: Chapter[],
 }

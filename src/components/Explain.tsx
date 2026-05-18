@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Chapter, Verses } from '@/constants/data'
 import React from 'react'
-import { Chapter,Verses } from '@/constants/data'
+import { StyleSheet, Text, View } from 'react-native'
 
 type chapterProps = {
     chapter: Chapter | null,
@@ -73,6 +73,48 @@ export const ExplainVersesComponent = ({ verse }: verseProps) => {
 
             <View style={styles.divider} />
         </>
+    )
+}
+
+export const ExplainVerseTranslateComponent = ({ verse }: verseProps) => {
+    return (
+        <View style={styles.contentContainer}>
+
+            {/* Translation */}
+            <View style={styles.card}>
+                <Text style={styles.sectionTitle}>
+                    Translation
+                </Text>
+
+                <Text style={styles.contentText}>
+                    {verse?.translations
+                        .filter(
+                            tr =>
+                                tr.author_name === "Shri Purohit Swami"
+                        )
+                        .map(tr => tr.description)
+                        .join(" ")}
+                </Text>
+            </View>
+
+            {/* Commentary */}
+            <View style={styles.card}>
+                <Text style={styles.sectionTitle}>
+                    Commentary
+                </Text>
+
+                <Text style={styles.contentText}>
+                    {verse?.commentaries
+                        .filter(
+                            tr =>
+                                tr.author_name === "Swami Sivananda"
+                        )
+                        .map(tr => tr.description)
+                        .join(" ")}
+                </Text>
+            </View>
+
+        </View>
     )
 }
 
@@ -196,5 +238,49 @@ const styles = StyleSheet.create({
         lineHeight: 30,
         textAlign: "center",
         color: "#4b5563",
+    },
+
+    contentContainer: {
+        paddingHorizontal: 14,
+        paddingVertical: 18,
+    },
+
+    // Card
+    card: {
+        backgroundColor: "#ffffff",
+        borderRadius: 20,
+        padding: 20,
+        marginBottom: 18,
+
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.08,
+        shadowRadius: 4,
+
+        elevation: 3,
+    },
+
+    // Section Title
+    sectionTitle: {
+        fontSize: 26,
+        fontWeight: "700",
+        textAlign: "center",
+        color: "#111827",
+        marginBottom: 18,
+    },
+
+    // Translation / Commentary Text
+    contentText: {
+        fontSize: 17,
+        lineHeight: 32,
+        color: "#374151",
+    },
+
+    // spacing helper
+    sectionSpacing: {
+        marginBottom: 12,
     },
 })

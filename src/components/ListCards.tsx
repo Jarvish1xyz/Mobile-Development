@@ -56,43 +56,25 @@ export const VersesList = ({ verses, navigateRender }: versesProps) => {
 
     return (
         <View style={styles.col}>
-            <View style={styles.contentContainer}>
+            <Pressable
+                key={verses.verse_number}
+                onPress={() => navigateRender(verses.id)}
+                style={styles.verseCard}
+            >
+                <Text style={styles.verseHeader}>
+                    Verse {verses.verse_number}
+                </Text>
 
-                {/* Translation */}
-                <View style={styles.card}>
-                    <Text style={styles.sectionTitle}>
-                        Translation
-                    </Text>
-
-                    <Text style={styles.contentText}>
-                        {verse.translations
-                            .filter(
-                                tr =>
-                                    tr.author_name === "Shri Purohit Swami"
-                            )
-                            .map(tr => tr.description)
-                            .join(" ")}
-                    </Text>
-                </View>
-
-                {/* Commentary */}
-                <View style={styles.card}>
-                    <Text style={styles.sectionTitle}>
-                        Commentary
-                    </Text>
-
-                    <Text style={styles.contentText}>
-                        {verse.commentaries
-                            .filter(
-                                tr =>
-                                    tr.author_name === "Swami Sivananda"
-                            )
-                            .map(tr => tr.description)
-                            .join(" ")}
-                    </Text>
-                </View>
-
-            </View>
+                <Text style={styles.verseDescription}>
+                    {verses.translations
+                        .filter(
+                            (tr) =>
+                                tr.author_name === "Swami Gambirananda"
+                        )
+                        .map((tr) => tr.description)
+                        .join(" ")}
+                </Text>
+            </Pressable>
         </View>
     )
 }
@@ -163,7 +145,7 @@ const styles = StyleSheet.create({
         fontWeight: "600",
         color: "#2b3036bb",
     },
-    versesCard: {
+    verseCard: {
         backgroundColor: "#ffffff",
         borderRadius: 16,
         padding: 16,
@@ -179,13 +161,17 @@ const styles = StyleSheet.create({
 
         elevation: 3,
     },
-    versesHeader: {
+
+    // Verse Header
+    verseHeader: {
         fontSize: 16,
         fontWeight: "700",
         color: "#f59e0b",
         marginBottom: 10,
     },
-    versesDescription: {
+
+    // Verse Description
+    verseDescription: {
         fontSize: 15,
         lineHeight: 28,
         color: "#374151",
