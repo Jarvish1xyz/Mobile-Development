@@ -91,7 +91,7 @@ const Search = () => {
           />
 
           <Text style={styles.buttonText}>
-            Search Verse
+            Search
           </Text>
         </TouchableOpacity>
       </View>

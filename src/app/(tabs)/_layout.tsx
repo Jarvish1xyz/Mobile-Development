@@ -66,22 +66,6 @@ export default function TabLayout() {
         }}
       />
 
-      {/* Hidden Chapter Page */}
-      <Tabs.Screen
-        name="chapter/[id]"
-        options={{
-          href: null,
-        }}
-      />
-
-      {/* Hidden Verse Page */}
-      <Tabs.Screen
-        name="verses/[id]"
-        options={{
-          href: null,
-        }}
-      />
-
     </Tabs>
   );
 }
