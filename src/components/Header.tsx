@@ -1,8 +1,9 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native";
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
 
-const HeaderComponent = () => {
+export const HeaderComponent = () => {
   return (
     <SafeAreaView style={styles.headerWrapper}>
       <View style={styles.header}>
@@ -21,9 +22,48 @@ const HeaderComponent = () => {
   );
 }
 
-export default HeaderComponent
+export const HeaderOfChapter = () => {
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.iconButton} onPress={() => router.back()}>
+        <Ionicons name="chevron-back" size={22} color={'white'} />
+      </TouchableOpacity>
+
+      <Text style={styles.title}>Chapter Detail</Text>
+    </View>
+  );
+};
+
+export const HeaderOfVerses = () => {
+  return (
+    <View style={styles.container}>
+      <TouchableOpacity style={styles.iconButton} onPress={() => router.back()}>
+        <Ionicons name="chevron-back" size={22} color={'white'} />
+      </TouchableOpacity>
+
+      <Text style={styles.title}>Verse Detail</Text>
+    </View>
+  );
+};
+
 
 const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 0,
+    paddingTop: 8,
+    paddingBottom: 12,
+  },
+  iconButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    backgroundColor: "#868482",
+    justifyContent: "center",
+    alignItems: "center",
+  },
   headerWrapper: {
     backgroundColor: "#ffffff",
   },

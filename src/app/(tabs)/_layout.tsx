@@ -1,37 +1,87 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 
-export default function RootLayout() {
+export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
         headerShown: false,
+
+        tabBarStyle: {
+          backgroundColor: "#fffaf3",
+          borderTopWidth: 0,
+          height: 65,
+        },
+
+        tabBarActiveTintColor: "#d97706",
+        tabBarInactiveTintColor: "#6b7280",
       }}
     >
-      <Tabs.Screen name='index'
+
+      {/* Home */}
+      <Tabs.Screen
+        name="index"
         options={{
-          title: 'Home',
-          tabBarIcon:({color, size}) => (
-            <Ionicons name='home' color={color} size={size}/>
-          )
+          title: "Home",
+
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons
+              name="home"
+              size={size}
+              color={color}
+            />
+          ),
         }}
       />
-      <Tabs.Screen name='search'
+
+      {/* Search */}
+      <Tabs.Screen
+        name="search"
         options={{
-          title: 'Search',
-          tabBarIcon:({color, size}) => (
-            <Ionicons name='search' color={color} size={size}/>
-          )
+          title: "Search",
+
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons
+              name="search"
+              size={size}
+              color={color}
+            />
+          ),
         }}
       />
-      <Tabs.Screen name='about'
+
+      {/* About */}
+      <Tabs.Screen
+        name="about"
         options={{
-          title: 'About',
-          tabBarIcon:({color, size}) => (
-            <Ionicons name='information-circle' color={color} size={size}/>
-          )
+          title: "About",
+
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons
+              name="information-circle"
+              size={size}
+              color={color}
+            />
+          ),
         }}
       />
+
+      {/* Hidden Chapter Page */}
+      <Tabs.Screen
+        name="chapter/[id]"
+        options={{
+          href: null,
+        }}
+      />
+
+      {/* Hidden Verse Page */}
+      <Tabs.Screen
+        name="verses/[id]"
+        options={{
+          href: null,
+        }}
+      />
+
     </Tabs>
   );
 }

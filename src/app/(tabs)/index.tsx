@@ -1,10 +1,10 @@
-import HeaderComponent from "@/components/Header";
+import {HeaderComponent} from "@/components/Header";
 import {ChapterList} from "@/components/ListCards";
 import { Chapter } from "@/constants/data";
 import axios from 'axios';
 import { router } from 'expo-router';
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, View, Text } from "react-native";
 // import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 
@@ -53,6 +53,7 @@ export default function Index() {
         )}
         showsVerticalScrollIndicator={false}
       />
+      {/* <Text>Index Page</Text> */}
     </View>
   );
 }
@@ -60,7 +61,7 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f3f4f6",
+    backgroundColor: "#fffaf3",
     // marginHorizontal: 8,
     // marginTop: 8,
   },

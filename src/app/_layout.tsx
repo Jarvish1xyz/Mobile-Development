@@ -5,19 +5,7 @@ export default function RootLayout() {
     <Stack
       screenOptions={{
         headerShown: false,
-
       }}
-    >
-      {/* <Stack.Screen name='(tabs)'
-        options={{
-          title: 'Home',
-        }}
-      />
-      <Stack.Screen name='(chapter)'
-        options={{
-          title: 'Chapter Details'
-        }}
-      /> */}
-    </Stack>
+    />
   );
 }

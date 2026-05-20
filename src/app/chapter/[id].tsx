@@ -1,11 +1,12 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native'
+import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState, useCallback, useEffect } from 'react'
 import { router, useLocalSearchParams } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import axios from 'axios';
-import { Chapter, Verses } from '../../constants/data';
+import { Chapter, Verses } from '@/constants/data';
 import { ExplainChapterComponent } from '@/components/Explain';
 import { VersesList } from '@/components/ListCards';
+import { HeaderOfChapter } from '@/components/Header';
 
 const chaperByIdPage = () => {
 
@@ -44,7 +45,7 @@ const chaperByIdPage = () => {
 
   const handelNavigation = (id: number) => {
     router.push({
-      pathname: `/verses/:${id}`,
+      pathname: `/verses/[id]`,
       params: { chId: chId, id: id }
     });
   }
@@ -52,8 +53,7 @@ const chaperByIdPage = () => {
   return (
     <View style={styles.screen}>
 
-      <View style={styles.verseContainer}>
-
+      <View style={[styles.verseContainer, { marginTop: inset.top * 1.2 }]}>
         <FlatList
           data={versesList}
           keyExtractor={(item) => item.id.toString()}
@@ -63,8 +63,12 @@ const chaperByIdPage = () => {
               navigateRender={handelNavigation}
             />
           )}
-          ListHeaderComponent={
-            <ExplainChapterComponent chapter={chapterData} />
+          ListHeaderComponent={(
+            <>
+              <HeaderOfChapter />
+              <ExplainChapterComponent chapter={chapterData} />
+            </>
+          )
           }
           showsVerticalScrollIndicator={false}
         />
@@ -81,10 +85,11 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#f3f4f6",
   },
-
+  
   // Verse List Container
   verseContainer: {
-    paddingHorizontal: 12,
+    // backgroundColor: "#eb8705",
+    marginHorizontal: 12,
     paddingBottom: 20,
   },
 });

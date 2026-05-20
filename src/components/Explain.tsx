@@ -1,6 +1,7 @@
 import { Chapter, Verses } from '@/constants/data'
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
+import { VersesList } from './ListCards'
 
 type chapterProps = {
     chapter: Chapter | null,
@@ -31,7 +32,7 @@ export const ExplainChapterComponent = ({ chapter }: chapterProps) => {
 
             <View style={styles.verseCountWrapper}>
                 <Text style={styles.verseCount}>
-                    48 Verses
+                    {chapter?.verses_count} Verses
                 </Text>
             </View>
 
@@ -64,69 +65,58 @@ export const ExplainVersesComponent = ({ verse }: verseProps) => {
             </View>
 
             <View style={styles.divider} />
-
-            <View style={styles.verseCountWrapper}>
-                <Text style={styles.verseCount}>
-                    48 Verses
-                </Text>
-            </View>
-
             <View style={styles.divider} />
+
+            <View style={styles.contentContainer}>
+
+                {/* Translation */}
+                <View style={styles.card}>
+                    <Text style={styles.sectionTitle}>
+                        Translation
+                    </Text>
+
+                    <Text style={styles.contentText}>
+                        {verse?.translations
+                            .filter(
+                                tr =>
+                                    tr.author_name === "Shri Purohit Swami"
+                            )
+                            .map(tr => tr.description)
+                            .join(" ")}
+                    </Text>
+                </View>
+
+                {/* Commentary */}
+                <View style={styles.card}>
+                    <Text style={styles.sectionTitle}>
+                        Commentary
+                    </Text>
+
+                    <Text style={styles.contentText}>
+                        {verse?.commentaries
+                            .filter(
+                                tr =>
+                                    tr.author_name === "Swami Sivananda"
+                            )
+                            .map(tr => tr.description)
+                            .join(" ")}
+                    </Text>
+                </View>
+
+            </View>
         </>
-    )
-}
-
-export const ExplainVerseTranslateComponent = ({ verse }: verseProps) => {
-    return (
-        <View style={styles.contentContainer}>
-
-            {/* Translation */}
-            <View style={styles.card}>
-                <Text style={styles.sectionTitle}>
-                    Translation
-                </Text>
-
-                <Text style={styles.contentText}>
-                    {verse?.translations
-                        .filter(
-                            tr =>
-                                tr.author_name === "Shri Purohit Swami"
-                        )
-                        .map(tr => tr.description)
-                        .join(" ")}
-                </Text>
-            </View>
-
-            {/* Commentary */}
-            <View style={styles.card}>
-                <Text style={styles.sectionTitle}>
-                    Commentary
-                </Text>
-
-                <Text style={styles.contentText}>
-                    {verse?.commentaries
-                        .filter(
-                            tr =>
-                                tr.author_name === "Swami Sivananda"
-                        )
-                        .map(tr => tr.description)
-                        .join(" ")}
-                </Text>
-            </View>
-
-        </View>
     )
 }
 
 const styles = StyleSheet.create({
     explainContainer: {
-        backgroundColor: "#ffffff",
+        backgroundColor: "#fffaf3",
         paddingHorizontal: 18,
         paddingVertical: 20,
-        marginBottom: 10,
+        marginHorizontal: 10,
+        marginVertical: 10,
 
-        // borderBottomLeftRadius: 20,
-        // borderBottomRightRadius: 20,
+        borderRadius: 10,
 
         shadowColor: "#000",
         shadowOffset: {
@@ -134,9 +124,9 @@ const styles = StyleSheet.create({
             height: 2,
         },
         shadowOpacity: 0.08,
-        shadowRadius: 4,
+        shadowRadius: 5,
 
-        elevation: 3,
+        elevation: 4,
     },
 
     // Chapter Small Text
@@ -185,12 +175,12 @@ const styles = StyleSheet.create({
     },
 
     verseTopContainer: {
-        backgroundColor: "#ffffff",
+        backgroundColor: "#fffaf3",
         paddingHorizontal: 20,
         paddingVertical: 24,
 
-        borderBottomLeftRadius: 24,
-        borderBottomRightRadius: 24,
+        borderRadius: 10,
+        // borderBottomRightRadius: 24,
 
         shadowColor: "#000",
         shadowOffset: {
@@ -214,8 +204,8 @@ const styles = StyleSheet.create({
 
     // Sanskrit Shloka
     sanskritText: {
-        fontSize: 24,
-        lineHeight: 42,
+        fontSize: 20,
+        lineHeight: 20,
         textAlign: "center",
         color: "#b45309",
         fontWeight: "600",

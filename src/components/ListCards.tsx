@@ -57,8 +57,7 @@ export const VersesList = ({ verses, navigateRender }: versesProps) => {
     return (
         <View style={styles.col}>
             <Pressable
-                key={verses.verse_number}
-                onPress={() => navigateRender(verses.id)}
+                onPress={() => navigateRender(verses.verse_number)}
                 style={styles.verseCard}
             >
                 <Text style={styles.verseHeader}>
@@ -160,6 +159,7 @@ const styles = StyleSheet.create({
         shadowRadius: 4,
 
         elevation: 3,
+        
     },
 
     // Verse Header
