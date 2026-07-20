@@ -37,7 +37,7 @@ export const HeaderOfChapter = () => {
 export const HeaderOfVerses = () => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.iconButton} onPress={() => router.back()}>
+      <TouchableOpacity style={styles.iconButton} onPress={() => {console.log(router.canGoBack());router.back()}}>
         <Ionicons name="chevron-back" size={22} color={'white'} />
       </TouchableOpacity>
 

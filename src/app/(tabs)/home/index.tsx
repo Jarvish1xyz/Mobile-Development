@@ -1,10 +1,10 @@
-import {HeaderComponent} from "@/components/Header";
-import {ChapterList} from "@/components/ListCards";
+import { HeaderComponent } from "@/components/Header";
+import { ChapterList } from "@/components/ListCards";
 import { Chapter } from "@/constants/data";
 import axios from 'axios';
 import { router } from 'expo-router';
 import { useEffect, useState } from "react";
-import { FlatList, StyleSheet, View, Text } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 // import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 
@@ -35,13 +35,16 @@ export default function Index() {
   }, []);
 
   const handelNavigation = (id: number) => {
-    router.push(`/chapter/${id}`);
+    router.push({
+      pathname: "/home/chapter/[id]",
+      params: { id },
+    });
   }
 
 
   return (
     <View style={[styles.container]}>
-      <HeaderComponent/>
+      <HeaderComponent />
       <FlatList
         data={chapters}
         keyExtractor={(item) => item.id.toString()}
@@ -63,6 +66,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fffaf3",
     // marginHorizontal: 8,
-    // marginTop: 8,
+    paddingTop: 8,
   },
 });

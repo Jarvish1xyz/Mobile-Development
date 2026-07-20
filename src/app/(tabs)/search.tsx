@@ -16,11 +16,14 @@ const Search = () => {
 
   const handleSearch = () => {
     if (!verse) {
-      router.push(`/chapter/${chapter}`)
+      router.push({
+        pathname: "/home/chapter/[id]",
+        params: { id:chapter },
+      });
     }
     else {
       router.push({
-        pathname: `/verses/[id]`,
+        pathname: `/home/verses/[id]`,
         params: { chId: chapter, id: verse }
       });
     }

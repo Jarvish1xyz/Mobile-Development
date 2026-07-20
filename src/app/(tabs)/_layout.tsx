@@ -13,14 +13,14 @@ export default function TabLayout() {
           height: 65,
         },
 
-        tabBarActiveTintColor: "#d97706",
+        tabBarActiveTintColor: "#db9141",
         tabBarInactiveTintColor: "#6b7280",
       }}
     >
 
       {/* Home */}
       <Tabs.Screen
-        name="index"
+        name="home"
         options={{
           title: "Home",
 
@@ -65,6 +65,26 @@ export default function TabLayout() {
           ),
         }}
       />
+
+      <Tabs.Screen
+        name="home/chapter/[id]"
+        options={{
+          href: null,
+        }}
+      />
+
+      <Tabs.Screen
+        name="home/verses/[id]"
+        options={{
+          href: null,
+        }}
+      />
+      {/* <Tabs.Screen
+        name="home/index"
+        options={{
+          href: null,
+        }}
+      /> */}
 
     </Tabs>
   );

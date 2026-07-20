@@ -1,6 +1,6 @@
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState, useCallback, useEffect } from 'react'
-import { router, useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams, useNavigation, useSegments } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import axios from 'axios';
 import { Chapter, Verses } from '@/constants/data';
@@ -12,7 +12,8 @@ const chaperByIdPage = () => {
 
   const inset = useSafeAreaInsets();
   const { chId, id } = useLocalSearchParams();
-  // console.log(chId, id);
+  const pathName = useSegments();
+  const navigation = useNavigation();
 
   const [verses, setVerses] = useState<Verses | null>(null);
 
@@ -33,6 +34,7 @@ const chaperByIdPage = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(JSON.stringify(navigation.getState(), null, 2));
   }, [fetchData]);
 
   return (

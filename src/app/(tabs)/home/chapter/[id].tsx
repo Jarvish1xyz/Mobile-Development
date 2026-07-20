@@ -1,6 +1,6 @@
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useState, useCallback, useEffect } from 'react'
-import { router, useLocalSearchParams } from 'expo-router';
+import { router, useLocalSearchParams, useSegments } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import axios from 'axios';
 import { Chapter, Verses } from '@/constants/data';
@@ -13,6 +13,7 @@ const chaperByIdPage = () => {
   const inset = useSafeAreaInsets();
   const { id } = useLocalSearchParams();
   const chId = Number(id);
+  const pathName = useSegments();
 
   const [chapterData, setChapterData] = useState<Chapter | null>(null);
   const [versesList, setVersesList] = useState<Verses | null>(null);
@@ -41,11 +42,12 @@ const chaperByIdPage = () => {
 
   useEffect(() => {
     fetchData();
+    console.log(pathName);
   }, [fetchData]);
 
   const handelNavigation = (id: number) => {
     router.push({
-      pathname: `/verses/[id]`,
+      pathname: `/home/verses/[id]`,
       params: { chId: chId, id: id }
     });
   }
@@ -90,6 +92,6 @@ const styles = StyleSheet.create({
   verseContainer: {
     // backgroundColor: "#eb8705",
     marginHorizontal: 12,
-    paddingBottom: 20,
+    // paddingBottom: 20,
   },
 });
